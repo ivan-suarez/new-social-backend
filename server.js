@@ -1,15 +1,16 @@
 const express = require('express')
 const app = express()
-const {PORT, mongoURI} = require('./config/config')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const postListItemsRoutes = require('./routes/PostListItems')
 const Cors = require('cors')
+const dotenv = require('dotenv')
+dotenv.config()
 
 app.use(Cors())
 app.use(bodyParser.json())
 
-mongoose.connect(mongoURI, {
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology:true
 }).then(() => console.log('MongoDB database connected'))
@@ -18,4 +19,4 @@ mongoose.connect(mongoURI, {
 app.use('/api/post', postListItemsRoutes)
 app.get('/', (req, res) => res.send('Hello world'))
 
-app.listen(PORT, () => console.log(`App listening at http://localhost:${PORT}`))
+app.listen(process.env.port, () => console.log(`App listening at http://localhost:${process.env.PORT}`))
