@@ -19,4 +19,4 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/post', postListItemsRoutes)
 app.get('/', (req, res) => res.send('Hello world'))
 
-app.listen(process.env.port, () => console.log(`App listening at http://localhost:${process.env.PORT}`))
+app.listen(process.env.PORT, () => console.log(`App listening at http://localhost:${process.env.PORT}`))
